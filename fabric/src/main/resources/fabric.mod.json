@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "context_util",
+  "version": "${version}",
+  "name": "Context Util",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Me!"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/context_util/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.forgetmelody.contextutil.fabric.ContextUtilFabric"
+    ],
+    "client": [
+      "io.github.forgetmelody.contextutil.fabric.client.ExampleModFabricClient"
+    ]
+  },
+  "mixins": [
+    "context_util.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.1.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
