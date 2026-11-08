@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/context_util.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/context_util.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/context_util.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/context_util.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/context_util.common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/common/context_util.common.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/context_util.fabric.main.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/context_util.fabric.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/context_util.fabric.test.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/context_util.fabric.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/neoforge/context_util.neoforge.main.iml" filepath="$PROJECT_DIR$/.idea/modules/neoforge/context_util.neoforge.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/neoforge/context_util.neoforge.test.iml" filepath="$PROJECT_DIR$/.idea/modules/neoforge/context_util.neoforge.test.iml" />
+    </modules>
+  </component>
+</project>
