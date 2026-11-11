@@ -9,7 +9,7 @@ import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
 
 public record Ignite(
         NumberProvider duration
-) implements EntityFunction {
+) implements ContextEntityFunction {
     public static final MapCodec<Ignite> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             NumberProviders.CODEC.fieldOf("duration").forGetter(Ignite::duration)
     ).apply(instance, Ignite::new));
@@ -20,7 +20,7 @@ public record Ignite(
     }
 
     @Override
-    public MapCodec<? extends EntityFunction> codec() {
+    public MapCodec<? extends ContextEntityFunction> codec() {
         return MAP_CODEC;
     }
 }

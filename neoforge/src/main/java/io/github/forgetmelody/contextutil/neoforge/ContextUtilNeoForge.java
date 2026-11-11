@@ -1,15 +1,20 @@
 package io.github.forgetmelody.contextutil.neoforge;
 
 import io.github.forgetmelody.contextutil.ContextUtil;
-import io.github.forgetmelody.contextutil.functions.entities.EntityFunctions;
-import io.github.forgetmelody.contextutil.functions.locationbaseds.LocationBasedFunctions;
-import io.github.forgetmelody.contextutil.providers.entities.EntityProviders;
-import io.github.forgetmelody.contextutil.providers.itemstacks.ItemStackProvider;
-import io.github.forgetmelody.contextutil.providers.itemstacks.ItemStackProviders;
-import io.github.forgetmelody.contextutil.providers.locations.LocationProvider;
-import io.github.forgetmelody.contextutil.providers.locations.LocationProviders;
-import io.github.forgetmelody.contextutil.providers.soundevents.SoundEventProvider;
-import io.github.forgetmelody.contextutil.providers.soundevents.SoundEventProviders;
+import io.github.forgetmelody.contextutil.functions.entities.ContextEntityFunction;
+import io.github.forgetmelody.contextutil.functions.entities.ContextEntityFunctions;
+import io.github.forgetmelody.contextutil.functions.locationbaseds.ContextLocationBasedFunction;
+import io.github.forgetmelody.contextutil.functions.locationbaseds.ContextLocationBasedFunctions;
+import io.github.forgetmelody.contextutil.providers.entities.ContextEntityProvider;
+import io.github.forgetmelody.contextutil.providers.entities.ContextEntityProviders;
+import io.github.forgetmelody.contextutil.providers.identifiers.ContextIdentifierProvider;
+import io.github.forgetmelody.contextutil.providers.identifiers.ContextIdentifierProviders;
+import io.github.forgetmelody.contextutil.providers.itemstacks.ContextItemStackProvider;
+import io.github.forgetmelody.contextutil.providers.itemstacks.ContextItemStackProviders;
+import io.github.forgetmelody.contextutil.providers.locations.ContextLocationProvider;
+import io.github.forgetmelody.contextutil.providers.locations.ContextLocationProviders;
+import io.github.forgetmelody.contextutil.providers.soundevents.ContextSoundEventProvider;
+import io.github.forgetmelody.contextutil.providers.soundevents.ContextSoundEventProviders;
 import io.github.forgetmelody.contextutil.registries.BuiltInRegistries;
 import io.github.forgetmelody.contextutil.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
@@ -26,21 +31,23 @@ public final class ContextUtilNeoForge {
     }
 
     private static void registerRegistries(NewRegistryEvent event) {
-        event.register(BuiltInRegistries.ENTITY_FUNCTION_TYPE);
-        event.register(BuiltInRegistries.LOCATION_BASED_FUNCTION_TYPE);
-        event.register(BuiltInRegistries.SOUND_EVENT_PROVIDER_TYPE);
-        event.register(BuiltInRegistries.ITEM_STACK_PROVIDER_TYPE);
-        event.register(BuiltInRegistries.ENTITY_PROVIDER_TYPE);
-        event.register(BuiltInRegistries.LOCATION_PROVIDER_TYPE);
+        event.register(BuiltInRegistries.CONTEXT_ENTITY_FUNCTION_TYPE);
+        event.register(BuiltInRegistries.CONTEXT_LOCATION_BASED_FUNCTION_TYPE);
+        event.register(BuiltInRegistries.CONTEXT_SOUND_EVENT_PROVIDER_TYPE);
+        event.register(BuiltInRegistries.CONTEXT_ITEM_STACK_PROVIDER_TYPE);
+        event.register(BuiltInRegistries.CONTEXT_ENTITY_PROVIDER_TYPE);
+        event.register(BuiltInRegistries.CONTEXT_LOCATION_PROVIDER_TYPE);
+        event.register(BuiltInRegistries.CONTEXT_IDENTIFIER_PROVIDER_TYPE);
     }
 
     private static void registerDataPackRegistries(DataPackRegistryEvent.NewRegistry event) {
-        event.dataPackRegistry(Registries.ENTITY_FUNCTION, EntityFunctions.DIRECT_CODEC, EntityFunctions.NETWORK_CODEC);
-        event.dataPackRegistry(Registries.LOCATION_BASED_FUNCTION, LocationBasedFunctions.DIRECT_CODEC, LocationBasedFunctions.NETWORK_CODEC);
-        event.dataPackRegistry(Registries.SOUND_EVENT_PROVIDER, SoundEventProviders.DIRECT_CODEC, SoundEventProviders.NETWORK_CODEC);
-        event.dataPackRegistry(Registries.ITEM_STACK_PROVIDER, ItemStackProviders.DIRECT_CODEC, ItemStackProviders.NETWORK_CODEC);
-        event.dataPackRegistry(Registries.ENTITY_PROVIDER, EntityProviders.DIRECT_CODEC, EntityProviders.NETWORK_CODEC);
-        event.dataPackRegistry(Registries.LOCATION_PROVIDER, LocationProviders.DIRECT_CODEC, LocationProviders.NETWORK_CODEC);
+        event.dataPackRegistry(Registries.CONTEXT_ENTITY_FUNCTION, ContextEntityFunction.DIRECT_CODEC, ContextEntityFunctions.NETWORK_CODEC);
+        event.dataPackRegistry(Registries.CONTEXT_LOCATION_BASED_FUNCTION, ContextLocationBasedFunction.DIRECT_CODEC, ContextLocationBasedFunctions.NETWORK_CODEC);
+        event.dataPackRegistry(Registries.CONTEXT_SOUND_EVENT_PROVIDER, ContextSoundEventProvider.DIRECT_CODEC, ContextSoundEventProviders.NETWORK_CODEC);
+        event.dataPackRegistry(Registries.CONTEXT_ITEM_STACK_PROVIDER, ContextItemStackProvider.DIRECT_CODEC, ContextItemStackProviders.NETWORK_CODEC);
+        event.dataPackRegistry(Registries.CONTEXT_ENTITY_PROVIDER, ContextEntityProvider.DIRECT_CODEC, ContextEntityProviders.NETWORK_CODEC);
+        event.dataPackRegistry(Registries.CONTEXT_LOCATION_PROVIDER, ContextLocationProvider.DIRECT_CODEC, ContextLocationProviders.NETWORK_CODEC);
+        event.dataPackRegistry(Registries.CONTEXT_IDENTIFIER_PROVIDER, ContextIdentifierProvider.DIRECT_CODEC, ContextIdentifierProviders.NETWORK_CODEC);
     }
 
 }

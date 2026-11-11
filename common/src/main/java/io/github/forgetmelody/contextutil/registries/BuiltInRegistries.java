@@ -2,23 +2,25 @@ package io.github.forgetmelody.contextutil.registries;
 
 import com.mojang.serialization.Lifecycle;
 import com.mojang.serialization.MapCodec;
-import io.github.forgetmelody.contextutil.functions.entities.EntityFunction;
-import io.github.forgetmelody.contextutil.functions.locationbaseds.LocationBasedFunction;
-import io.github.forgetmelody.contextutil.providers.entities.EntityProvider;
-import io.github.forgetmelody.contextutil.providers.itemstacks.ItemStackProvider;
-import io.github.forgetmelody.contextutil.providers.locations.LocationProvider;
-import io.github.forgetmelody.contextutil.providers.soundevents.SoundEventProvider;
+import io.github.forgetmelody.contextutil.functions.entities.ContextEntityFunction;
+import io.github.forgetmelody.contextutil.functions.locationbaseds.ContextLocationBasedFunction;
+import io.github.forgetmelody.contextutil.providers.entities.ContextEntityProvider;
+import io.github.forgetmelody.contextutil.providers.identifiers.ContextIdentifierProvider;
+import io.github.forgetmelody.contextutil.providers.itemstacks.ContextItemStackProvider;
+import io.github.forgetmelody.contextutil.providers.locations.ContextLocationProvider;
+import io.github.forgetmelody.contextutil.providers.soundevents.ContextSoundEventProvider;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 
 public final class BuiltInRegistries {
-    public static final Registry<MapCodec<? extends EntityFunction>> ENTITY_FUNCTION_TYPE = create(Registries.ENTITY_FUNCTION_TYPE);
-    public static final Registry<MapCodec<? extends LocationBasedFunction>> LOCATION_BASED_FUNCTION_TYPE = create(Registries.LOCATION_BASED_FUNCTION_TYPE);
-    public static final Registry<MapCodec<? extends SoundEventProvider>> SOUND_EVENT_PROVIDER_TYPE = create(Registries.SOUND_EVENT_PROVIDER_TYPE);
-    public static final Registry<MapCodec<? extends ItemStackProvider>> ITEM_STACK_PROVIDER_TYPE = create(Registries.ITEM_STACK_PROVIDER_TYPE);
-    public static final Registry<MapCodec<? extends EntityProvider>> ENTITY_PROVIDER_TYPE = create(Registries.ENTITY_PROVIDER_TYPE);
-    public static final Registry<MapCodec<? extends LocationProvider>> LOCATION_PROVIDER_TYPE = create(Registries.LOCATION_PROVIDER_TYPE);
+    public static final Registry<MapCodec<? extends ContextEntityFunction>> CONTEXT_ENTITY_FUNCTION_TYPE = create(Registries.CONTEXT_ENTITY_FUNCTION_TYPE);
+    public static final Registry<MapCodec<? extends ContextLocationBasedFunction>> CONTEXT_LOCATION_BASED_FUNCTION_TYPE = create(Registries.CONTEXT_LOCATION_BASED_FUNCTION_TYPE);
+    public static final Registry<MapCodec<? extends ContextSoundEventProvider>> CONTEXT_SOUND_EVENT_PROVIDER_TYPE = create(Registries.CONTEXT_SOUND_EVENT_PROVIDER_TYPE);
+    public static final Registry<MapCodec<? extends ContextItemStackProvider>> CONTEXT_ITEM_STACK_PROVIDER_TYPE = create(Registries.CONTEXT_ITEM_STACK_PROVIDER_TYPE);
+    public static final Registry<MapCodec<? extends ContextEntityProvider>> CONTEXT_ENTITY_PROVIDER_TYPE = create(Registries.CONTEXT_ENTITY_PROVIDER_TYPE);
+    public static final Registry<MapCodec<? extends ContextLocationProvider>> CONTEXT_LOCATION_PROVIDER_TYPE = create(Registries.CONTEXT_LOCATION_PROVIDER_TYPE);
+    public static final Registry<MapCodec<? extends ContextIdentifierProvider>> CONTEXT_IDENTIFIER_PROVIDER_TYPE = create(Registries.CONTEXT_IDENTIFIER_PROVIDER_TYPE);
 
     private BuiltInRegistries() {
     }
