@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 
-public record Empty() implements ContextItemStackProvider {
+public record Empty() implements ItemStackProvider {
     public static final Empty INSTANCE = new Empty();
     public static final MapCodec<Empty> MAP_CODEC = MapCodec.unit(INSTANCE);
 
@@ -14,7 +14,7 @@ public record Empty() implements ContextItemStackProvider {
     }
 
     @Override
-    public MapCodec<? extends ContextItemStackProvider> codec() {
+    public MapCodec<? extends ItemStackProvider> codec() {
         return MAP_CODEC;
     }
 }

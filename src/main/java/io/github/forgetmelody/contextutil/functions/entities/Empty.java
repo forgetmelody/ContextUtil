@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.storage.loot.LootContext;
 
-public record Empty() implements ContextEntityFunction {
+public record Empty() implements EntityFunction {
     public static final Empty INSTANCE = new Empty();
     public static final MapCodec<Empty> MAP_CODEC = MapCodec.unit(INSTANCE);
 
@@ -14,7 +14,7 @@ public record Empty() implements ContextEntityFunction {
     }
 
     @Override
-    public MapCodec<? extends ContextEntityFunction> codec() {
+    public MapCodec<? extends EntityFunction> codec() {
         return MAP_CODEC;
     }
 }

@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
-public record ThisEntity() implements ContextEntityProvider {
+public record ThisEntity() implements EntityProvider {
     public static final ThisEntity INSTANCE = new ThisEntity();
     public static final MapCodec<ThisEntity> MAP_CODEC = MapCodec.unit(INSTANCE);
 
@@ -19,7 +19,7 @@ public record ThisEntity() implements ContextEntityProvider {
     }
 
     @Override
-    public MapCodec<? extends ContextEntityProvider> codec() {
+    public MapCodec<? extends EntityProvider> codec() {
         return MAP_CODEC;
     }
 

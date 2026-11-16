@@ -5,7 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.storage.loot.LootContext;
 import org.jetbrains.annotations.Nullable;
 
-public record Empty() implements ContextEntityProvider {
+public record Empty() implements EntityProvider {
     public static final Empty INSTANCE = new Empty();
     public static final MapCodec<Empty> MAP_CODEC = MapCodec.unit(INSTANCE);
 
@@ -15,7 +15,7 @@ public record Empty() implements ContextEntityProvider {
     }
 
     @Override
-    public MapCodec<? extends ContextEntityProvider> codec() {
+    public MapCodec<? extends EntityProvider> codec() {
         return MAP_CODEC;
     }
 }

@@ -3,8 +3,8 @@ package io.github.forgetmelody.contextutil.providers.entities;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.github.forgetmelody.contextutil.functions.entities.ContextEntityFunction;
-import io.github.forgetmelody.contextutil.providers.locations.ContextLocationProvider;
+import io.github.forgetmelody.contextutil.functions.entities.EntityFunction;
+import io.github.forgetmelody.contextutil.providers.locations.LocationProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -19,18 +19,18 @@ import java.util.Arrays;
 
 public record Summon(
         EntityType<?> entityType,
-        ContextLocationProvider position,
-        HolderSet<ContextEntityFunction> functions
-) implements ContextEntityProvider {
+        LocationProvider position,
+        HolderSet<EntityFunction> functions
+) implements EntityProvider {
     public static final Codec<Summon> INLINE_CODEC = net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.byNameCodec().xmap(Summon::new, Summon::entityType);
     public static final MapCodec<Summon> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity_type").forGetter(Summon::entityType),
-            ContextLocationProvider.DIRECT_CODEC.optionalFieldOf("position", ContextLocationProvider.origin()).forGetter(Summon::position),
-            ContextEntityFunction.LIST_CODEC.optionalFieldOf("functions", HolderSet.empty()).forGetter(Summon::functions)
+            LocationProvider.DIRECT_CODEC.optionalFieldOf("position", LocationProvider.origin()).forGetter(Summon::position),
+            EntityFunction.LIST_CODEC.optionalFieldOf("functions", HolderSet.empty()).forGetter(Summon::functions)
     ).apply(instance, Summon::new));
 
     private Summon(EntityType<?> entityType) {
-        this(entityType, ContextLocationProvider.origin(), HolderSet.empty());
+        this(entityType, LocationProvider.origin(), HolderSet.empty());
     }
 
     @Override
@@ -41,7 +41,7 @@ public record Summon(
             return this.entityType.spawn(
                     level,
                     entity -> {
-                        for (Holder<ContextEntityFunction> function : this.functions) {
+                        for (Holder<EntityFunction> function : this.functions) {
                             function.value().apply(entity, context);
                         }
                     },
@@ -55,36 +55,36 @@ public record Summon(
     }
 
     @Override
-    public MapCodec<? extends ContextEntityProvider> codec() {
+    public MapCodec<? extends EntityProvider> codec() {
         return MAP_CODEC;
     }
 
     public static class Builder {
         private final EntityType<?> entityType;
-        private ContextLocationProvider position = ContextLocationProvider.origin();
-        private HolderSet<ContextEntityFunction> functions = HolderSet.empty();
+        private LocationProvider position = LocationProvider.origin();
+        private HolderSet<EntityFunction> functions = HolderSet.empty();
 
         public Builder(EntityType<?> entityType) {
             this.entityType = entityType;
         }
 
-        public Builder position(ContextLocationProvider position) {
+        public Builder position(LocationProvider position) {
             this.position = position;
             return this;
         }
 
-        public Builder functions(ContextEntityFunction... functions) {
+        public Builder functions(EntityFunction... functions) {
             this.functions = HolderSet.direct(Arrays.stream(functions).map(Holder::direct).toList());
             return this;
         }
 
-        public Builder functions(HolderSet<ContextEntityFunction> functions) {
+        public Builder functions(HolderSet<EntityFunction> functions) {
             this.functions = functions;
             return this;
         }
 
         @SafeVarargs
-        public final Builder functions(Holder<ContextEntityFunction>... functions) {
+        public final Builder functions(Holder<EntityFunction>... functions) {
             this.functions = HolderSet.direct(Arrays.asList(functions));
             return this;
         }

@@ -8,7 +8,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.storage.loot.LootContext;
 import org.jspecify.annotations.Nullable;
 
-public record Constant(Holder<SoundEvent> value) implements ContextSoundEventProvider {
+public record Constant(Holder<SoundEvent> value) implements SoundEventProvider {
     public static final Codec<Constant> INLINE_CODEC = SoundEvent.CODEC.xmap(Constant::new, Constant::value);
     public static final MapCodec<Constant> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             SoundEvent.CODEC.fieldOf("value").forGetter(Constant::value)
@@ -20,7 +20,7 @@ public record Constant(Holder<SoundEvent> value) implements ContextSoundEventPro
     }
 
     @Override
-    public MapCodec<? extends ContextSoundEventProvider> codec() {
+    public MapCodec<? extends SoundEventProvider> codec() {
         return MAP_CODEC;
     }
 }

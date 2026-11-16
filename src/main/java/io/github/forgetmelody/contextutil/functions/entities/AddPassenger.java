@@ -2,15 +2,15 @@ package io.github.forgetmelody.contextutil.functions.entities;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.github.forgetmelody.contextutil.providers.entities.ContextEntityProvider;
+import io.github.forgetmelody.contextutil.providers.entities.EntityProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.storage.loot.LootContext;
 
 public record AddPassenger(
-        ContextEntityProvider passenger
-) implements ContextEntityFunction {
+        EntityProvider passenger
+) implements EntityFunction {
     public static final MapCodec<AddPassenger> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            ContextEntityProvider.DIRECT_CODEC.fieldOf("passengers").forGetter(AddPassenger::passenger)
+            EntityProvider.DIRECT_CODEC.fieldOf("passengers").forGetter(AddPassenger::passenger)
     ).apply(instance, AddPassenger::new));
 
     @Override
@@ -22,7 +22,7 @@ public record AddPassenger(
     }
 
     @Override
-    public MapCodec<? extends ContextEntityFunction> codec() {
+    public MapCodec<? extends EntityFunction> codec() {
         return MAP_CODEC;
     }
 }

@@ -2,7 +2,7 @@ package io.github.forgetmelody.contextutil.functions.entities;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.github.forgetmelody.contextutil.providers.identifiers.ContextIdentifierProvider;
+import io.github.forgetmelody.contextutil.providers.identifiers.IdentifierProvider;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
@@ -16,13 +16,13 @@ import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
 
 public record ApplyAttributeModifier(
-        ContextIdentifierProvider id,
+        IdentifierProvider id,
         Holder<Attribute> attribute,
         NumberProvider amount,
         AttributeModifier.Operation operation
-) implements ContextEntityFunction {
+) implements EntityFunction {
     public static final MapCodec<ApplyAttributeModifier> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            ContextIdentifierProvider.DIRECT_CODEC.fieldOf("id").forGetter(ApplyAttributeModifier::id),
+            IdentifierProvider.DIRECT_CODEC.fieldOf("id").forGetter(ApplyAttributeModifier::id),
             Attribute.CODEC.fieldOf("attribute").forGetter(ApplyAttributeModifier::attribute),
             NumberProviders.CODEC.fieldOf("amount").forGetter(ApplyAttributeModifier::amount),
             AttributeModifier.Operation.CODEC.fieldOf("operation").forGetter(ApplyAttributeModifier::operation)
@@ -50,7 +50,7 @@ public record ApplyAttributeModifier(
     }
 
     @Override
-    public MapCodec<? extends ContextEntityFunction> codec() {
+    public MapCodec<? extends EntityFunction> codec() {
         return MAP_CODEC;
     }
 }

@@ -7,7 +7,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.storage.loot.LootContext;
 import org.jspecify.annotations.Nullable;
 
-public record Constant(Identifier value) implements ContextIdentifierProvider {
+public record Constant(Identifier value) implements IdentifierProvider {
     public static final Codec<Constant> INLINE_CODEC = Identifier.CODEC.xmap(Constant::new, Constant::value);
     public static final MapCodec<Constant> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Identifier.CODEC.fieldOf("value").forGetter(Constant::value)
@@ -19,7 +19,7 @@ public record Constant(Identifier value) implements ContextIdentifierProvider {
     }
 
     @Override
-    public MapCodec<? extends ContextIdentifierProvider> codec() {
+    public MapCodec<? extends IdentifierProvider> codec() {
         return MAP_CODEC;
     }
 }

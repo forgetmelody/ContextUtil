@@ -6,7 +6,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.storage.loot.LootContext;
 import org.jspecify.annotations.Nullable;
 
-public record Empty() implements ContextSoundEventProvider {
+public record Empty() implements SoundEventProvider {
     public static final Empty INSTANCE = new Empty();
     public static final MapCodec<Empty> MAP_CODEC = MapCodec.unit(INSTANCE);
 
@@ -16,7 +16,7 @@ public record Empty() implements ContextSoundEventProvider {
     }
 
     @Override
-    public MapCodec<? extends ContextSoundEventProvider> codec() {
+    public MapCodec<? extends SoundEventProvider> codec() {
         return MAP_CODEC;
     }
 }

@@ -1,10 +1,11 @@
 package io.github.forgetmelody.contextutil.data;
 
+import io.github.forgetmelody.contextutil.registries.Registries;
 import net.minecraft.core.RegistrySetBuilder;
 
 public final class DataPackRegistryObjects {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-            .add(Registries.CONTEXT_ENTITY_FUNCTION, ContextEntityFunctions::boostrap);
+            .add(Registries.ENTITY_FUNCTION, ContextEntityFunctions::boostrap);
 
     private DataPackRegistryObjects() {
     }

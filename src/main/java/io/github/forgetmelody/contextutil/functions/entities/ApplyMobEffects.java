@@ -2,7 +2,7 @@ package io.github.forgetmelody.contextutil.functions.entities;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.github.forgetmelody.contextutil.providers.entities.ContextEntityProvider;
+import io.github.forgetmelody.contextutil.providers.entities.EntityProvider;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryCodecs;
@@ -15,18 +15,18 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
 
-public record ApplyMobEffect(
+public record ApplyMobEffects(
         HolderSet<MobEffect> mobEffects,
         NumberProvider duration,
         NumberProvider amplifier,
-        ContextEntityProvider source
-) implements ContextEntityFunction {
-    public static final MapCodec<ApplyMobEffect> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            RegistryCodecs.homogeneousList(Registries.MOB_EFFECT).fieldOf("mob_effects").forGetter(ApplyMobEffect::mobEffects),
-            NumberProviders.CODEC.fieldOf("duration").forGetter(ApplyMobEffect::duration),
-            NumberProviders.CODEC.fieldOf("amplifier").forGetter(ApplyMobEffect::amplifier),
-            ContextEntityProvider.DIRECT_CODEC.optionalFieldOf("source", ContextEntityProvider.empty()).forGetter(ApplyMobEffect::source)
-    ).apply(instance, ApplyMobEffect::new));
+        EntityProvider source
+) implements EntityFunction {
+    public static final MapCodec<ApplyMobEffects> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            RegistryCodecs.homogeneousList(Registries.MOB_EFFECT).fieldOf("mob_effects").forGetter(ApplyMobEffects::mobEffects),
+            NumberProviders.CODEC.fieldOf("duration").forGetter(ApplyMobEffects::duration),
+            NumberProviders.CODEC.fieldOf("amplifier").forGetter(ApplyMobEffects::amplifier),
+            EntityProvider.DIRECT_CODEC.optionalFieldOf("source", EntityProvider.empty()).forGetter(ApplyMobEffects::source)
+    ).apply(instance, ApplyMobEffects::new));
 
     @Override
     public void apply(Entity entity, LootContext context) {
@@ -48,7 +48,7 @@ public record ApplyMobEffect(
     }
 
     @Override
-    public MapCodec<? extends ContextEntityFunction> codec() {
+    public MapCodec<? extends EntityFunction> codec() {
         return MAP_CODEC;
     }
 }

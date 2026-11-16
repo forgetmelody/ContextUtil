@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public record Origin(Optional<Vec3> offset) implements ContextLocationProvider {
+public record Origin(Optional<Vec3> offset) implements LocationProvider {
     public static final Origin INSTANCE = new Origin(Optional.empty());
     public static final MapCodec<Origin> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Vec3.CODEC.optionalFieldOf("offset").forGetter(Origin::offset)
@@ -22,7 +22,7 @@ public record Origin(Optional<Vec3> offset) implements ContextLocationProvider {
     }
 
     @Override
-    public MapCodec<? extends ContextLocationProvider> codec() {
+    public MapCodec<? extends LocationProvider> codec() {
         return MAP_CODEC;
     }
 }
