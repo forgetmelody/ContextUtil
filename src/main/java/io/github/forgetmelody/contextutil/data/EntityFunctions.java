@@ -3,7 +3,7 @@ package io.github.forgetmelody.contextutil.data;
 import io.github.forgetmelody.contextutil.ContextUtil;
 import io.github.forgetmelody.contextutil.functions.entities.EntityFunction;
 import io.github.forgetmelody.contextutil.providers.entities.EntityProvider;
-import io.github.forgetmelody.contextutil.providers.itemstacks.ItemStackProvider;
+import io.github.forgetmelody.contextutil.providers.iteminstances.ItemInstanceProvider;
 import io.github.forgetmelody.contextutil.providers.positions.PositionProvider;
 import io.github.forgetmelody.contextutil.registries.Registries;
 import net.minecraft.core.HolderSet;
@@ -25,7 +25,7 @@ public final class EntityFunctions {
                 EQUIP_IRON_HELMET,
                 EntityFunction.setEquipmentSlot(
                                 EquipmentSlot.HEAD,
-                                ItemStackProvider.constant(Items.IRON_HELMET)
+                                ItemInstanceProvider.constant(Items.IRON_HELMET)
                         )
         );
         context.register(

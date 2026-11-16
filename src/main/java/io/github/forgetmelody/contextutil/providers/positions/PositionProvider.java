@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import io.github.forgetmelody.contextutil.ContextUtil;
+import io.github.forgetmelody.contextutil.providers.entities.EntityProvider;
 import io.github.forgetmelody.contextutil.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -48,11 +49,16 @@ public interface PositionProvider extends LootContextUser {
         return new Random(x, y, z);
     }
 
+    static PositionProvider fromEntity(EntityProvider entity) {
+        return new FromEntity(entity);
+    }
+
     static void bootstrap(RegisterEvent.RegisterHelper<MapCodec<? extends PositionProvider>> context) {
         context.register(ContextUtil.id("empty"), Empty.MAP_CODEC);
         context.register(ContextUtil.id("constant"), Constant.MAP_CODEC);
         context.register(ContextUtil.id("origin"), Origin.MAP_CODEC);
         context.register(ContextUtil.id("random"), Random.MAP_CODEC);
+        context.register(ContextUtil.id("from_entity"), FromEntity.MAP_CODEC);
     }
 
     private static Either<Constant, PositionProvider> wrap(PositionProvider provider) {

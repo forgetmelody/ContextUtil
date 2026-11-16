@@ -5,7 +5,7 @@ import com.mojang.serialization.MapCodec;
 import io.github.forgetmelody.contextutil.ContextUtil;
 import io.github.forgetmelody.contextutil.providers.entities.EntityProvider;
 import io.github.forgetmelody.contextutil.providers.identifiers.IdentifierProvider;
-import io.github.forgetmelody.contextutil.providers.itemstacks.ItemStackProvider;
+import io.github.forgetmelody.contextutil.providers.iteminstances.ItemInstanceProvider;
 import io.github.forgetmelody.contextutil.registries.BuiltInRegistries;
 import io.github.forgetmelody.contextutil.registries.Registries;
 import net.minecraft.core.Holder;
@@ -41,7 +41,7 @@ public interface EntityFunction extends LootContextUser {
         return new Ignite(duration);
     }
 
-    static EntityFunction setEquipmentSlot(EquipmentSlot slot, ItemStackProvider item) {
+    static EntityFunction setEquipmentSlot(EquipmentSlot slot, ItemInstanceProvider item) {
         return new SetEquipmentSlot(slot, item);
     }
 
@@ -64,6 +64,7 @@ public interface EntityFunction extends LootContextUser {
 
     static void bootstrap(RegisterEvent.RegisterHelper<MapCodec<? extends EntityFunction>> context) {
         context.register(ContextUtil.id("empty"), Empty.MAP_CODEC);
+        context.register(ContextUtil.id("all_of"), AllOf.MAP_CODEC);
         context.register(ContextUtil.id("add_passenger"), AddPassenger.MAP_CODEC);
         context.register(ContextUtil.id("apply_attribute_modifier"), ApplyAttributeModifier.MAP_CODEC);
         context.register(ContextUtil.id("apply_mob_effect"), ApplyMobEffects.MAP_CODEC);

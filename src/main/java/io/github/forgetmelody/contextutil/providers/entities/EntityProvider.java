@@ -38,10 +38,30 @@ public interface EntityProvider extends LootContextUser {
         return ThisEntity.INSTANCE;
     }
 
+    static EntityProvider interactingEntity() {
+        return InteractingEntity.INSTANCE;
+    }
+
+    static EntityProvider targetEntity() {
+        return TargetEntity.INSTANCE;
+    }
+
+    static EntityProvider attackingEntity() {
+        return AttackingEntity.INSTANCE;
+    }
+
+    static EntityProvider directAttackingEntity() {
+        return DirectAttackingEntity.INSTANCE;
+    }
+
     static void bootstrap(RegisterEvent.RegisterHelper<MapCodec<? extends EntityProvider>> context) {
         context.register(ContextUtil.id("empty"), Empty.MAP_CODEC);
         context.register(ContextUtil.id("summon"), Summon.MAP_CODEC);
         context.register(ContextUtil.id("this_entity"), ThisEntity.MAP_CODEC);
+        context.register(ContextUtil.id("interacting_entity"), InteractingEntity.MAP_CODEC);
+        context.register(ContextUtil.id("target_entity"), TargetEntity.MAP_CODEC);
+        context.register(ContextUtil.id("attacking_entity"), AttackingEntity.MAP_CODEC);
+        context.register(ContextUtil.id("direct_attacking_entity"), DirectAttackingEntity.MAP_CODEC);
     }
 
     private static Either<Summon, EntityProvider> wrap(EntityProvider provider) {
@@ -52,4 +72,8 @@ public interface EntityProvider extends LootContextUser {
 
     MapCodec<? extends EntityProvider> codec();
 
+    default @Nullable Entity orElse(LootContext context, Entity entity) {
+        Entity thisEntity = this.get(context);
+        return thisEntity == null ? entity : thisEntity;
+    }
 }

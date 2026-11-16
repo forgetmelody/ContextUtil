@@ -8,7 +8,8 @@ import io.github.forgetmelody.contextutil.functions.entities.*;
 import io.github.forgetmelody.contextutil.functions.locationbaseds.LocationBasedFunction;
 import io.github.forgetmelody.contextutil.providers.entities.EntityProvider;
 import io.github.forgetmelody.contextutil.providers.identifiers.IdentifierProvider;
-import io.github.forgetmelody.contextutil.providers.itemstacks.ItemStackProvider;
+import io.github.forgetmelody.contextutil.providers.iteminstances.ItemInstanceProvider;
+import io.github.forgetmelody.contextutil.providers.numbers.NumberProviders;
 import io.github.forgetmelody.contextutil.providers.positions.PositionProvider;
 import io.github.forgetmelody.contextutil.providers.soundevents.SoundEventProvider;
 import io.github.forgetmelody.contextutil.providers.soundsources.SoundSourceProvider;
@@ -62,7 +63,7 @@ public class ContextUtil {
         event.dataPackRegistry(Registries.LOCATION_BASED_FUNCTION, LocationBasedFunction.DIRECT_CODEC, LocationBasedFunction.NETWORK_CODEC);
         event.dataPackRegistry(Registries.SOUND_EVENT_PROVIDER, SoundEventProvider.DIRECT_CODEC, SoundEventProvider.NETWORK_CODEC);
         event.dataPackRegistry(Registries.SOUND_SOURCE_PROVIDER, SoundSourceProvider.DIRECT_CODEC, SoundSourceProvider.NETWORK_CODEC);
-        event.dataPackRegistry(Registries.ITEM_STACK_PROVIDER, ItemStackProvider.DIRECT_CODEC, ItemStackProvider.NETWORK_CODEC);
+        event.dataPackRegistry(Registries.ITEM_STACK_PROVIDER, ItemInstanceProvider.DIRECT_CODEC, ItemInstanceProvider.NETWORK_CODEC);
         event.dataPackRegistry(Registries.ENTITY_PROVIDER, EntityProvider.DIRECT_CODEC, EntityProvider.NETWORK_CODEC);
         event.dataPackRegistry(Registries.POSITION_PROVIDER, PositionProvider.DIRECT_CODEC, PositionProvider.NETWORK_CODEC);
         event.dataPackRegistry(Registries.IDENTIFIER_PROVIDER, IdentifierProvider.DIRECT_CODEC, IdentifierProvider.NETWORK_CODEC);
@@ -75,8 +76,9 @@ public class ContextUtil {
         event.register(Registries.SOUND_SOURCE_PROVIDER_TYPE, SoundSourceProvider::bootstrap);
         event.register(Registries.ENTITY_PROVIDER_TYPE, EntityProvider::bootstrap);
         event.register(Registries.IDENTIFIER_PROVIDER_TYPE, IdentifierProvider::bootstrap);
-        event.register(Registries.ITEM_STACK_PROVIDER_TYPE, ItemStackProvider::bootstrap);
+        event.register(Registries.ITEM_STACK_PROVIDER_TYPE, ItemInstanceProvider::bootstrap);
         event.register(Registries.POSITION_PROVIDER_TYPE, PositionProvider::bootstrap);
+        event.register(net.minecraft.core.registries.Registries.LOOT_NUMBER_PROVIDER_TYPE, NumberProviders::bootstrap);
     }
 
     private static void registerDataProviders(GatherDataEvent.Client event) {

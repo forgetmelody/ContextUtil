@@ -53,6 +53,7 @@ public interface LocationBasedFunction extends LootContextUser {
 
     static void bootstrap(RegisterEvent.RegisterHelper<MapCodec<? extends LocationBasedFunction>> context) {
         context.register(ContextUtil.id("empty"), Empty.MAP_CODEC);
+        context.register(ContextUtil.id("all_of"), AllOf.MAP_CODEC);
         context.register(ContextUtil.id("spawn_particles"), SpawnParticles.MAP_CODEC);
         context.register(ContextUtil.id("play_sound"), PlaySound.MAP_CODEC);
     }
