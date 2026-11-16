@@ -5,7 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import io.github.forgetmelody.contextutil.ContextUtil;
 import io.github.forgetmelody.contextutil.functions.entities.EntityFunction;
-import io.github.forgetmelody.contextutil.providers.locations.LocationProvider;
+import io.github.forgetmelody.contextutil.providers.positions.PositionProvider;
 import io.github.forgetmelody.contextutil.registries.BuiltInRegistries;
 import net.minecraft.core.HolderSet;
 import net.minecraft.world.entity.Entity;
@@ -30,7 +30,7 @@ public interface EntityProvider extends LootContextUser {
         return Empty.INSTANCE;
     }
 
-    static EntityProvider summon(EntityType<?> entityType, LocationProvider position, HolderSet<EntityFunction> functions) {
+    static EntityProvider summon(EntityType<?> entityType, PositionProvider position, HolderSet<EntityFunction> functions) {
         return new Summon(entityType, position, functions);
     }
 
@@ -38,14 +38,14 @@ public interface EntityProvider extends LootContextUser {
         return ThisEntity.INSTANCE;
     }
 
-    static Either<Summon, EntityProvider> wrap(EntityProvider provider) {
-        return provider instanceof Summon summon ? Either.left(summon) : Either.right(provider);
-    }
-
     static void bootstrap(RegisterEvent.RegisterHelper<MapCodec<? extends EntityProvider>> context) {
         context.register(ContextUtil.id("empty"), Empty.MAP_CODEC);
         context.register(ContextUtil.id("summon"), Summon.MAP_CODEC);
         context.register(ContextUtil.id("this_entity"), ThisEntity.MAP_CODEC);
+    }
+
+    private static Either<Summon, EntityProvider> wrap(EntityProvider provider) {
+        return provider instanceof Summon summon ? Either.left(summon) : Either.right(provider);
     }
 
     @Nullable Entity get(LootContext context);

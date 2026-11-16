@@ -9,8 +9,9 @@ import io.github.forgetmelody.contextutil.functions.locationbaseds.LocationBased
 import io.github.forgetmelody.contextutil.providers.entities.EntityProvider;
 import io.github.forgetmelody.contextutil.providers.identifiers.IdentifierProvider;
 import io.github.forgetmelody.contextutil.providers.itemstacks.ItemStackProvider;
-import io.github.forgetmelody.contextutil.providers.locations.LocationProvider;
+import io.github.forgetmelody.contextutil.providers.positions.PositionProvider;
 import io.github.forgetmelody.contextutil.providers.soundevents.SoundEventProvider;
+import io.github.forgetmelody.contextutil.providers.soundsources.SoundSourceProvider;
 import io.github.forgetmelody.contextutil.registries.BuiltInRegistries;
 import io.github.forgetmelody.contextutil.registries.Registries;
 import net.minecraft.commands.CommandBuildContext;
@@ -49,6 +50,7 @@ public class ContextUtil {
         event.register(BuiltInRegistries.ENTITY_FUNCTION_TYPE);
         event.register(BuiltInRegistries.LOCATION_BASED_FUNCTION_TYPE);
         event.register(BuiltInRegistries.SOUND_EVENT_PROVIDER_TYPE);
+        event.register(BuiltInRegistries.SOUND_SOURCE_PROVIDER_TYPE);
         event.register(BuiltInRegistries.ITEM_STACK_PROVIDER_TYPE);
         event.register(BuiltInRegistries.ENTITY_PROVIDER_TYPE);
         event.register(BuiltInRegistries.POSITION_PROVIDER_TYPE);
@@ -59,9 +61,10 @@ public class ContextUtil {
         event.dataPackRegistry(Registries.ENTITY_FUNCTION, EntityFunction.DIRECT_CODEC, EntityFunction.NETWORK_CODEC);
         event.dataPackRegistry(Registries.LOCATION_BASED_FUNCTION, LocationBasedFunction.DIRECT_CODEC, LocationBasedFunction.NETWORK_CODEC);
         event.dataPackRegistry(Registries.SOUND_EVENT_PROVIDER, SoundEventProvider.DIRECT_CODEC, SoundEventProvider.NETWORK_CODEC);
+        event.dataPackRegistry(Registries.SOUND_SOURCE_PROVIDER, SoundSourceProvider.DIRECT_CODEC, SoundSourceProvider.NETWORK_CODEC);
         event.dataPackRegistry(Registries.ITEM_STACK_PROVIDER, ItemStackProvider.DIRECT_CODEC, ItemStackProvider.NETWORK_CODEC);
         event.dataPackRegistry(Registries.ENTITY_PROVIDER, EntityProvider.DIRECT_CODEC, EntityProvider.NETWORK_CODEC);
-        event.dataPackRegistry(Registries.LOCATION_PROVIDER, LocationProvider.DIRECT_CODEC, LocationProvider.NETWORK_CODEC);
+        event.dataPackRegistry(Registries.POSITION_PROVIDER, PositionProvider.DIRECT_CODEC, PositionProvider.NETWORK_CODEC);
         event.dataPackRegistry(Registries.IDENTIFIER_PROVIDER, IdentifierProvider.DIRECT_CODEC, IdentifierProvider.NETWORK_CODEC);
     }
 
@@ -69,10 +72,11 @@ public class ContextUtil {
         event.register(Registries.ENTITY_FUNCTION_TYPE, EntityFunction::bootstrap);
         event.register(Registries.LOCATION_BASED_FUNCTION_TYPE, LocationBasedFunction::bootstrap);
         event.register(Registries.SOUND_EVENT_PROVIDER_TYPE, SoundEventProvider::bootstrap);
+        event.register(Registries.SOUND_SOURCE_PROVIDER_TYPE, SoundSourceProvider::bootstrap);
         event.register(Registries.ENTITY_PROVIDER_TYPE, EntityProvider::bootstrap);
         event.register(Registries.IDENTIFIER_PROVIDER_TYPE, IdentifierProvider::bootstrap);
         event.register(Registries.ITEM_STACK_PROVIDER_TYPE, ItemStackProvider::bootstrap);
-        event.register(Registries.POSITION_PROVIDER_TYPE, LocationProvider::bootstrap);
+        event.register(Registries.POSITION_PROVIDER_TYPE, PositionProvider::bootstrap);
     }
 
     private static void registerDataProviders(GatherDataEvent.Client event) {

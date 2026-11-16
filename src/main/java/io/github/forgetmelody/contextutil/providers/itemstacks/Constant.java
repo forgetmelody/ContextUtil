@@ -19,11 +19,6 @@ public record Constant(ItemStackTemplate value) implements ItemStackProvider {
     }
 
     @Override
-    public ItemStack getCopied(LootContext context) {
-        return this.get(context);
-    }
-
-    @Override
     public MapCodec<? extends ItemStackProvider> codec() {
         return MAP_CODEC;
     }

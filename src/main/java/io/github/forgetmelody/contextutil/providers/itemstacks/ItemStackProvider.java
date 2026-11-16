@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootContextUser;
 import net.neoforged.neoforge.registries.RegisterEvent;
-import org.jspecify.annotations.Nullable;
 
 import java.util.function.Function;
 
@@ -41,13 +40,8 @@ public interface ItemStackProvider extends LootContextUser {
         context.register(ContextUtil.id("constant"), Constant.MAP_CODEC);
     }
 
-    @Nullable ItemStack get(LootContext context);
+    ItemStack get(LootContext context);
 
     MapCodec<? extends ItemStackProvider> codec();
-
-    default @Nullable ItemStack getCopied(LootContext context) {
-        ItemStack itemStack = this.get(context);
-        return itemStack == null ? null : itemStack.copy();
-    }
 
 }

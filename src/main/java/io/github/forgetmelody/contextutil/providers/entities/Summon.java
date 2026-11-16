@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.forgetmelody.contextutil.functions.entities.EntityFunction;
-import io.github.forgetmelody.contextutil.providers.locations.LocationProvider;
+import io.github.forgetmelody.contextutil.providers.positions.PositionProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -19,18 +19,18 @@ import java.util.Arrays;
 
 public record Summon(
         EntityType<?> entityType,
-        LocationProvider position,
+        PositionProvider position,
         HolderSet<EntityFunction> functions
 ) implements EntityProvider {
     public static final Codec<Summon> INLINE_CODEC = net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.byNameCodec().xmap(Summon::new, Summon::entityType);
     public static final MapCodec<Summon> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity_type").forGetter(Summon::entityType),
-            LocationProvider.DIRECT_CODEC.optionalFieldOf("position", LocationProvider.origin()).forGetter(Summon::position),
+            PositionProvider.DIRECT_CODEC.optionalFieldOf("position", PositionProvider.origin()).forGetter(Summon::position),
             EntityFunction.LIST_CODEC.optionalFieldOf("functions", HolderSet.empty()).forGetter(Summon::functions)
     ).apply(instance, Summon::new));
 
     private Summon(EntityType<?> entityType) {
-        this(entityType, LocationProvider.origin(), HolderSet.empty());
+        this(entityType, PositionProvider.origin(), HolderSet.empty());
     }
 
     @Override
@@ -61,14 +61,14 @@ public record Summon(
 
     public static class Builder {
         private final EntityType<?> entityType;
-        private LocationProvider position = LocationProvider.origin();
+        private PositionProvider position = PositionProvider.origin();
         private HolderSet<EntityFunction> functions = HolderSet.empty();
 
         public Builder(EntityType<?> entityType) {
             this.entityType = entityType;
         }
 
-        public Builder position(LocationProvider position) {
+        public Builder position(PositionProvider position) {
             this.position = position;
             return this;
         }

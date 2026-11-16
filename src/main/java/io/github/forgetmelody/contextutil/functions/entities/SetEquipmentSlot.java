@@ -2,6 +2,7 @@ package io.github.forgetmelody.contextutil.functions.entities;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.github.forgetmelody.contextutil.providers.itemstacks.Constant;
 import io.github.forgetmelody.contextutil.providers.itemstacks.ItemStackProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -20,9 +21,9 @@ public record SetEquipmentSlot(
 
     @Override
     public void apply(Entity entity, LootContext context) {
-        ItemStack item = this.item.getCopied(context);
-        if (item != null && !item.isEmpty() && entity instanceof LivingEntity livingEntity) {
-            livingEntity.setItemSlot(this.slot, item);
+        ItemStack item = this.item.get(context);
+        if (!item.isEmpty() && entity instanceof LivingEntity livingEntity) {
+            livingEntity.setItemSlot(this.slot, this.item instanceof Constant ? item : item.copy());
         }
     }
 

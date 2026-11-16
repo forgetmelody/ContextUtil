@@ -4,7 +4,7 @@ import io.github.forgetmelody.contextutil.ContextUtil;
 import io.github.forgetmelody.contextutil.functions.entities.EntityFunction;
 import io.github.forgetmelody.contextutil.providers.entities.EntityProvider;
 import io.github.forgetmelody.contextutil.providers.itemstacks.ItemStackProvider;
-import io.github.forgetmelody.contextutil.providers.locations.LocationProvider;
+import io.github.forgetmelody.contextutil.providers.positions.PositionProvider;
 import io.github.forgetmelody.contextutil.registries.Registries;
 import net.minecraft.core.HolderSet;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -13,11 +13,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Items;
 
-public final class ContextEntityFunctions {
+public final class EntityFunctions {
     public static final ResourceKey<EntityFunction> EQUIP_IRON_HELMET = key("equip_iron_helmet");
     public static final ResourceKey<EntityFunction> RIDE_SKELETON_HORSE = key("ride_skeleton_horse");
 
-    private ContextEntityFunctions() {
+    private EntityFunctions() {
     }
 
     public static void boostrap(BootstrapContext<EntityFunction> context) {
@@ -33,7 +33,7 @@ public final class ContextEntityFunctions {
                 EntityFunction.setVehicle(
                         EntityProvider.summon(
                                 EntityType.SKELETON_HORSE,
-                                LocationProvider.origin(),
+                                PositionProvider.origin(),
                                 HolderSet.empty()
                         )
                 )

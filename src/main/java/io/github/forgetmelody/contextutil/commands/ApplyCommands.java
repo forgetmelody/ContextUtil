@@ -65,7 +65,7 @@ public final class ApplyCommands {
             LootParams params = new LootParams.Builder(level)
                     .withParameter(LootContextParams.ORIGIN, entity.position())
                     .withParameter(LootContextParams.THIS_ENTITY, entity)
-                    .create(LootContextParamSets.COMMAND_APPLY_ENTITY_FUNCTION);
+                    .create(LootContextParamSets.COMMAND_ENTITY_FUNCTION);
             LootContext context = new LootContext.Builder(params).create(function.unwrapKey().map(ResourceKey::identifier));
 
             function.value().apply(entity, context);
@@ -79,7 +79,13 @@ public final class ApplyCommands {
             Vec3 position,
             Holder<LocationBasedFunction> function
     ) {
+        ServerLevel level = source.getLevel();
+        LootParams params = new LootParams.Builder(level)
+                .withParameter(LootContextParams.ORIGIN, position)
+                .create(LootContextParamSets.COMMAND_LOCATION_BASED_FUNCTION);
+        LootContext context = new LootContext.Builder(params).create(function.unwrapKey().map(ResourceKey::identifier));
+        function.value().apply(position, context);
 
-        return 0;
+        return 1;
     }
 }
