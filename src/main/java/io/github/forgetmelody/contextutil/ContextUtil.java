@@ -32,7 +32,7 @@ import org.slf4j.Logger;
 
 @Mod(ContextUtil.MOD_ID)
 public class ContextUtil {
-    public static final String MOD_ID = "contextutil";
+    public static final String MOD_ID = "context_util";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public ContextUtil(IEventBus modEventBus, ModContainer modContainer) {
