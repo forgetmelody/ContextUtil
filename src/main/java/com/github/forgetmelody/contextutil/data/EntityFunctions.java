@@ -1,0 +1,46 @@
+package com.github.forgetmelody.contextutil.data;
+
+import com.github.forgetmelody.contextutil.ContextUtil;
+import com.github.forgetmelody.contextutil.functions.entities.EntityFunction;
+import com.github.forgetmelody.contextutil.providers.entities.EntityProvider;
+import com.github.forgetmelody.contextutil.providers.iteminstances.ItemInstanceProvider;
+import com.github.forgetmelody.contextutil.providers.positions.PositionProvider;
+import com.github.forgetmelody.contextutil.registries.Registries;
+import net.minecraft.core.HolderSet;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Items;
+
+public final class EntityFunctions {
+    public static final ResourceKey<EntityFunction> EQUIP_IRON_HELMET = key("equip_iron_helmet");
+    public static final ResourceKey<EntityFunction> RIDE_SKELETON_HORSE = key("ride_skeleton_horse");
+
+    private EntityFunctions() {
+    }
+
+    public static void boostrap(BootstrapContext<EntityFunction> context) {
+        context.register(
+                EQUIP_IRON_HELMET,
+                EntityFunction.setEquipmentSlot(
+                                EquipmentSlot.HEAD,
+                                ItemInstanceProvider.constant(Items.IRON_HELMET)
+                        )
+        );
+        context.register(
+                RIDE_SKELETON_HORSE,
+                EntityFunction.setVehicle(
+                        EntityProvider.summon(
+                                EntityType.SKELETON_HORSE,
+                                PositionProvider.origin(),
+                                HolderSet.empty()
+                        )
+                )
+        );
+    }
+
+    private static ResourceKey<EntityFunction> key(String name) {
+        return ResourceKey.create(Registries.ENTITY_FUNCTION, ContextUtil.id(name));
+    }
+}
